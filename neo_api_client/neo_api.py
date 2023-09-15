@@ -116,11 +116,13 @@ class NeoAPI:
 
         view_token = neo_api_client.LoginAPI(self.api_client).generate_view_token(password=password, mobilenumber=mobilenumber,
                                                                                   userid=userid, pan=pan, mpin=mpin)
-        if "error" not in view_token:
-            gen_otp = neo_api_client.LoginAPI(self.api_client).generate_otp()
-            # print(gen_otp)
-        else:
-            gen_otp = {'error': [{'code': '10522', 'message': 'Issues while generating OTP! Try to login again.'}]}
+        # As per discussion with Anand and Kotak Neo we does not need to send a OTP for every call
+        # hence commenting the get OTP function call - Ketan Wangade 14 sep 2023
+        # if "error" not in view_token:
+        #     gen_otp = neo_api_client.LoginAPI(self.api_client).generate_otp()
+        #     # print(gen_otp)
+        # else:
+        #     gen_otp = {'error': [{'code': '10522', 'message': 'Issues while generating OTP! Try to login again.'}]}
         return view_token
 
     def session_2fa(self, OTP):

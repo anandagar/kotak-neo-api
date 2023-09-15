@@ -5,8 +5,8 @@ numpy==1.24.2
 pyjsparser==2.7.1
 PyJWT==2.6.0
 python-dateutil==2.8.2
-python-dotenv==1.0.0
-requests==2.25.1
+python-dotenv
+requests
 six==1.16.0
 urllib3==1.26.14
 websocket-client==1.5.1

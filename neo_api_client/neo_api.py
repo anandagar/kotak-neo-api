@@ -69,7 +69,6 @@ class NeoAPI:
             self.api_client = ApiClient(self.configuration)
             try:
                 session_init = neo_api_client.LoginAPI(self.api_client).session_init()
-                print(json.dumps({"data": session_init}))
             except ApiException as ex:
                 error = ex
         elif access_token:

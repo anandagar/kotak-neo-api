@@ -2,9 +2,30 @@
 Place a New order
 
 ```python
-client.place_order(exchange_segment="", product="", price="", order_type="", quantity="", validity="", trading_symbol="",
-                   transaction_type="", amo="", disclosed_quantity="", market_protection="", pf="", trigger_price="",
-                   tag=)
+client.place_order(
+    exchange_segment="",
+    product="",
+    price="",
+    order_type="",
+    quantity="",
+    validity="",
+    trading_symbol="",
+    transaction_type="",
+    amo="NO",
+    disclosed_quantity="0",
+    market_protection="0",
+    pf="N",
+    trigger_price="0",
+    tag=None,
+    scrip_token=None,
+    square_off_type=None,
+    stop_loss_type=None,
+    stop_loss_value=None,
+    square_off_value=None,
+    last_traded_price=None,
+    trailing_stop_loss=None,
+    trailing_sl_value=None,
+)
 ```
 
 ### Example
@@ -12,40 +33,70 @@ client.place_order(exchange_segment="", product="", price="", order_type="", qua
 
 ```python
 from neo_api_client import NeoAPI
-        
+from neo_api_client import BaseUrl
+
+base_url = BaseUrl(ucc='').get_base_url()
+
 #First initialize session and generate session token
-
-client = NeoAPI(consumer_key=" ",consumer_secret=" ",environment=" ")
-client.login(mobilenumber=" ", password=" ")
-client.session_2fa(" ")
-
+client = NeoAPI(consumer_key="", consumer_secret="", environment='prod', access_token=None, neo_fin_key=None, base_url=base_url)
+client.totp_login(mobilenumber="", ucc="", totp='')
+client.totp_validate(mpin="")
 try:
     # Place a Order
-    client.place_order(exchange_segment="", product="", price="", order_type="", quantity="", validity="", trading_symbol="",
-                       transaction_type="", amo="NO", disclosed_quantity="0", market_protection="0", pf="N",
-                       trigger_price="0", tag=None)
+    client.place_order(
+        exchange_segment="",
+        product="",
+        price="",
+        order_type="",
+        quantity="",
+        validity="",
+        trading_symbol="",
+        transaction_type="",
+        amo="NO",
+        disclosed_quantity="0",
+        market_protection="0",
+        pf="N",
+        trigger_price="0",
+        tag=None,
+        scrip_token=None,
+        square_off_type=None,
+        stop_loss_type=None,
+        stop_loss_value=None,
+        square_off_value=None,
+        last_traded_price=None,
+        trailing_stop_loss=None,
+        trailing_sl_value=None,
+    )
 except Exception as e:
     print("Exception when calling OrderApi->place_order: %s\n" % e)
 ``` 
 
 ### Parameters
 
-| Name                 | Description                                                                                                              | Type           |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------|----------------|
-| *amo*                | YES/NO - (Default Value - NO)                                                                                            | Str [optional] |
-| *disclosed_quantity* | (Default Value - 0)                                                                                                      | Str [optional] |
-| *exchange_segment*   | nse_cm - NSE<br/>bse_cm - BSE<br/>nse_fo - NFO<br/>bse_fo - BFO<br/>cde_fo - CDS<br/>                        | Str            |
-| *market_protection*  | (Default Value - 0)                                                                                                      | Str [optional] |
-| *product*            | NRML - Normal<br/>CNC - Cash and Carry<br/>MIS - MIS<br/>CO - Cover Order<br/>                   | Str            |
-| *pf*                 | Default Value - “N”                                                                                                      | Str [optional] |
-| *price*              | price of the order                                                                                             | Str [optional] |
-| *order_type*         | L - Limit<br/>MKT - Market<br/>SL - Stop loss limit<br/>SL-M - Stop loss market                                          | Str            |
-| *quantity*           | quantity of the order                                                                                        | Str            |
-| *validity*           | Validity of the order - DAY, IOC, GTC, EOS                                                                     | Str            |
-| *trigger_price*      | Optional, required for stop loss and cover order                                                                           | Str [optional] |
-| *trading_symbol*     | pTrdSymbol in ScripMaster file                                                                                          | Str            |
-| *transaction_type*   | B(Buy), S(Sell)                                                                                                          | Str            |
-| *tag*                | Tag for this order                                                                                                       | Str [optional] |
+| Name                 | Description                                                                                                                                                                                                                                                                                                                                                       | Type           |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| *exchange_segment*   | nse_cm - NSE<br/>bse_cm - BSE<br/>nse_fo - NFO<br/>bse_fo - BFO<br/>cde_fo - CDS  <br/>mcx_fo - MCX                                                                                                                                                                                                                                                               | Str            |
+| *product*            | NRML - Normal<br/>CNC - Cash and Carry<br/>MIS - MIS<br/>CO - Cover Order<br/>BO - Bracket Order<br/>                                                                                                                                                                                                                                                             | Str            |
+| *price*              | price of the order                                                                                                                                                                                                                                                                                                                                                | Str [optional] |
+| *order_type*         | L - Limit<br/>MKT - Market<br/>SL - Stop loss limit<br/>SL-M - Stop loss market                                                                                                                                                                                                                                                                                   | Str            |
+| *quantity*           | quantity of the order                                                                                                                                                                                                                                                                                                                                             | Str            |
+| *validity*           | Validity of the order <br/> DAY - (Applicable for all orders across all segments)<br/> IOC - Immediate or Cancel (Not applicable for CO)<br/> GTC - Good Till Cancel (Applicable only for orders in MCX market)<br/> EOS - End of Session (Applicable only for orders in BSE and MCX market)<br/> GTD - Good Till Date (Applicable only for orders in MCX market) | Str            |
+| *trading_symbol*     | pTrdSymbol in ScripMaster file                                                                                                                                                                                                                                                                                                                                    | Str            |
+| *transaction_type*   | B(Buy), S(Sell)                                                                                                                                                                                                                                                                                                                                                   | Str            |
+| *amo*                | YES/NO - (Default Value - NO)                                                                                                                                                                                                                                                                                                                                     | Str [optional] |
+| *disclosed_quantity* | (Default Value - 0)                                                                                                                                                                                                                                                                                                                                               | Str [optional] |
+| *market_protection*  | (Default Value - 0)                                                                                                                                                                                                                                                                                                                                               | Str [optional] |
+| *pf*                 | Default Value - “N”                                                                                                                                                                                                                                                                                                                                               | Str [optional] |
+| *trigger_price*      | Optional, required for stop loss and cover order                                                                                                                                                                                                                                                                                                                  | Str [optional] |
+| *tag*                | Your own tag to track the order                                                                                                                                                                                                                                                                                                                                   | Str [optional] |
+| *scrip_token*        | Applicable only for Bracket Order                                                                                                                                                                                                                                                                                                                                 | Str [optional] |
+| *square_off_type*    | Applicable only for Bracket Order. Expected Values are 'Absolute' and 'Ticks'.                                                                                                                                                                                                                                                                                    | Str [optional] |
+| *stop_loss_type*     | Applicable only for bracket Order. Expected Values are 'Absolute' and 'Ticks'.                                                                                                                                                                                                                                                                                    | Str [optional] |
+| *stop_loss_value*    | Applicable only for Bracket Order                                                                                                                                                                                                                                                                                                                                 | Str [optional] |
+| *square_off_value*   | Applicable only for Bracket Order                                                                                                                                                                                                                                                                                                                                 | Str [optional] |
+| *last_traded_price*  | Applicable only for Bracket Order                                                                                                                                                                                                                                                                                                                                 | Str [optional] |
+| *trailing_stop_loss* | Applicable only for Bracket Order. Expected Values are 'Y' and 'N'.                                                                                                                                                                                                                                                                                               | Str [optional] |
+| *trailing_sl_value*  | Applicable only for Bracket Order. Expected Values are 'Y' and 'N'.                                                                                                                                                                                                                                                                                               | Str [optional] |
 
 
 ### Return type
@@ -57,7 +108,7 @@ except Exception as e:
 ```json
 {
     "stat": "Ok",
-    "nOrdNo": "237362700735243",
+    "nOrdNo": "",
     "stCode": 200
 }
 

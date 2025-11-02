@@ -1,8 +1,3 @@
-.idea
-.DS_Store
-build/
-venv
-dist/
-sdist/
-*.egg-info/
-**/__pycache__/
+*.pyc
+__pycache__/
+neo_api_client.egg-info/

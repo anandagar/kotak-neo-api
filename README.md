@@ -3,12 +3,13 @@
 - API version: 2.0.0
 - Package version: v2.0.0
 
-## Requirements.
+## Requirements
 
 Python 3.10 to 3.13
 
 ## Installation & Usage
-### pip install
+
+### pip install (Recommended)
 
 If the python package is hosted on a repository, you can install directly using:
 
@@ -21,26 +22,33 @@ If you are updating your package please use below command to install
 ```sh
 pip install --force-reinstall "git+https://github.com/Kotak-Neo/Kotak-neo-api-v2.git@v2.0.0#egg=neo_api_client"
 ```
-(you may need to run `pip` with root permission: `sudo pip install -e "`)
+(you may need to run `pip` with root permission: `sudo pip install`)
 
 Then import the package:
 ```python
 import neo_api_client
 ```
 
-### Setuptools
+### Local Development Installation
 
-Install via [Setuptools]
+For local development, the package now uses modern `pyproject.toml` instead of deprecated `setup.py`:
 
 ```sh
-python setup.py install --user
-```
-(or `sudo python setup.py install` to install the package for all users)
+# Clone the repository
+git clone https://github.com/Kotak-Neo/Kotak-neo-api-v2.git
+cd Kotak-neo-api-v2
 
-Then import the package:
-```python
-import neo_api_client
+# Install in editable mode (recommended for development)
+pip install -e .
+
+# Or install with development dependencies
+pip install -e ".[dev]"
+
+# Or install with all optional dependencies
+pip install -e ".[dev,docs]"
 ```
+
+**Note**: The old `setup.py install` method is deprecated. Use the commands above instead.
 
 ## Getting Started
 
